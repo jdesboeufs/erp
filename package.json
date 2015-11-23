@@ -1,0 +1,26 @@
+{
+  "name": "erp",
+  "version": "0.1.0",
+  "description": "Base de données collaborative pour les Établissements Recevants du Public (ERP)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgmap/erp.git"
+  },
+  "keywords": [
+    "ERP",
+    "database",
+    "emergency"
+  ],
+  "contributors": [
+      "Jérôme Desboeufs <jerome.desboeufs@data.gouv.fr>"
+  ],
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sgmap/erp/issues"
+  },
+  "homepage": "https://github.com/sgmap/erp#readme"
+}
