@@ -34,7 +34,7 @@ class CSVPreview extends React.Component {
             rows = rows.slice(1);
         }
         return (
-            <table className="table table-striped table-condensed">
+            <table className="table table-striped table-bordered table-condensed">
                 <thead>
                     {header ? <HeadListItemWrapper header={header} /> : ''}
                 </thead>
