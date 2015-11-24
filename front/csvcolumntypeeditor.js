@@ -2,12 +2,17 @@ import React from 'react';
 import collectionMap from 'lodash/collection/map';
 
 class ColumnWrapper extends React.Component {
+
+    onTypeChange(event) {
+        this.props.onTypeChange(event.target.value);
+    }
+
     render() {
         return (
             <tr>
                 <td>{this.props.column}</td>
                 <td>
-                    <select className="form-control">
+                    <select onChange={e => this.onTypeChange(e)} className="form-control" value={this.props.type || 'nonDefini'}>
                         <option value="nonDefini">-- Non défini --</option>
                         {collectionMap(this.props.selectableFields, (option, key) => <option value={key} key={key}>{option.label}</option>)}
                     </select>
@@ -19,6 +24,10 @@ class ColumnWrapper extends React.Component {
 }
 
 export default class CSVColumnTypeEditor extends React.Component {
+
+    onTypeChange(column, newType) {
+        this.props.onTypeChange(column, newType);
+    }
 
     /* Render */
     render() {
@@ -34,7 +43,7 @@ export default class CSVColumnTypeEditor extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.columns.map((column, i) => <ColumnWrapper selectableFields={this.props.selectableFields} column={column} key={i} />)}
+                        {this.props.columns.map((column, i) => <ColumnWrapper type={this.props.selectedTypes[column]} onTypeChange={newType => this.onTypeChange(column, newType)} selectableFields={this.props.selectableFields} column={column} key={i} />)}
                     </tbody>
                 </table>
             </div>
