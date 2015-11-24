@@ -18,7 +18,7 @@ export default class CSVDrop extends React.Component {
         return (
             <div>
                 <h2>1. Choix du fichier</h2>
-                <div style={{ height: '200px', background: '#ffaaaa' }} onDragOver={this.preventDefault} onDrop={e => this.drop(e)}>
+                <div style={{ height: '150px', background: '#eeeeee', border: '3px dashed #ccc' }} onDragOver={this.preventDefault} onDrop={e => this.drop(e)}>
                 </div>
             </div>
         );
