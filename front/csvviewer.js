@@ -1,4 +1,6 @@
 import React from 'react';
+import keys from 'lodash/object/keys';
+import mapCollection from 'lodash/collection/map';
 
 class HeaderColumnWrapper extends React.Component {
     render() {
@@ -20,26 +22,22 @@ class ColumnWrapper extends React.Component {
 
 class ListItemWrapper extends React.Component {
     render() {
-        return <tr>{this.props.row.map((column, i) => <ColumnWrapper key={i} column={column} />)}</tr>
+        return <tr>{mapCollection(this.props.row, (fieldValue, fieldName) => <ColumnWrapper key={fieldName} column={fieldValue} />)}</tr>
     }
 }
 
 class CSVPreview extends React.Component {
 
     render() {
-        let header;
-        let rows = this.props.rows;
-        if (this.props.hasHeader) {
-            header = rows[0];
-            rows = rows.slice(1);
-        }
+
+        const header = keys(this.props.rows[0]);
         return (
             <table className="table table-striped table-bordered table-condensed">
                 <thead>
                     {header ? <HeadListItemWrapper header={header} /> : ''}
                 </thead>
                 <tbody>
-                    {rows.map((row, i) => <ListItemWrapper key={i} row={row} />)}
+                    {this.props.rows.map((row, i) => <ListItemWrapper key={i} row={row} />)}
                 </tbody>
             </table>
         );
@@ -72,7 +70,7 @@ export default class CSVViewer extends React.Component {
         return (
             <div>
                 <h2>2. Aperçu des données et vérification</h2>
-                <CSVPreview hasHeader={this.props.csvHasHeader} rows={this.props.csvRows} />
+                <CSVPreview rows={this.props.csvRows} />
                 <EncodingSelector encoding={this.props.encoding} onChange={encoding => this.props.onEncodingChange(encoding)} />
             </div>
         );

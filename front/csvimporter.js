@@ -39,8 +39,9 @@ export default class CSVImporter extends React.Component {
     previewFile() {
         Papa.parse(this.state.currentFile, {
             preview: 9,
-            complete: (results) => this.setState({ lines: results.data, fileReady: true }),
-            encoding: this.state.encoding
+            complete: (results) => this.setState({ rows: results.data, fields: results.meta.fields, fileReady: true }),
+            encoding: this.state.encoding,
+            header: true
         });
     }
 
@@ -64,8 +65,8 @@ export default class CSVImporter extends React.Component {
             <div>
                 <h1>Importer des ERP à partir d'un fichier CSV</h1>
                 <CSVDrop onFile={file => this.onDropFile(file)} />
-                { this.state.fileReady ? <CSVViewer encoding={this.state.encoding} onEncodingChange={encoding => this.onEncodingChange(encoding)} csvRows={this.state.lines} csvHasHeader={true} /> : ''}
-                { this.state.fileReady ? <CSVColumnTypeEditor onTypeChange={(column, newType) => this.onTypeChange(column, newType)} selectedTypes={this.state.selectedTypes} selectableFields={this.selectableFields} columns={this.state.lines[0]} /> : ''}
+                { this.state.fileReady ? <CSVViewer encoding={this.state.encoding} onEncodingChange={encoding => this.onEncodingChange(encoding)} csvRows={this.state.rows} /> : ''}
+                { this.state.fileReady ? <CSVColumnTypeEditor onTypeChange={(column, newType) => this.onTypeChange(column, newType)} selectedTypes={this.state.selectedTypes} selectableFields={this.selectableFields} columns={this.state.fields} /> : ''}
             </div>
         );
     }
