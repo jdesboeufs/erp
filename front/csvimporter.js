@@ -19,22 +19,20 @@ export default class CSVImporter extends React.Component {
         this.encodingList = ['utf-8', 'iso-8859-1', 'windows-1252'];
     }
 
-    parseFile(file) {
-        Papa.parse(file || this.state.currentFile, {
-            preview: 5,
+    parseFile() {
+        Papa.parse(this.state.currentFile, {
+            preview: 9,
             complete: (results) => this.setState({ lines: results.data, fileReady: true }),
             encoding: this.state.encoding
         });
     }
 
     onEncodingChange(encoding) {
-        this.setState({ encoding });
-        this.parseFile();
+        this.setState({ encoding }, () => this.parseFile());
     }
 
     onDropFile(file) {
-        this.setState({ currentFile: file });
-        this.parseFile(file);
+        this.setState({ currentFile: file }, () => this.parseFile());
     }
 
     /* Render */
