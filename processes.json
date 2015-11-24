@@ -1,0 +1,13 @@
+{
+    "apps": [
+        {
+            "name": "erp",
+            "script": "server.js",
+            "exec_mode": "cluster",
+            "instances": 1,
+            "env": {
+                "PORT": 12124
+            }
+        }
+    ]
+}
