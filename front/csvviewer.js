@@ -58,6 +58,7 @@ class EncodingSelector extends React.Component {
                         <option value="utf-8">UTF-8</option>
                         <option value="iso-8859-1">ISO 8859-1 (Latin-1)</option>
                         <option value="iso-8859-15">ISO 8859-15 (Latin-9)</option>
+                        <option value="windows-1252">ANSI (Windows)</option>
                     </select>
                 </div>
         );

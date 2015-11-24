@@ -21,7 +21,7 @@ export default class CSVImporter extends React.Component {
             selectedTypes: {},
             columnErrors: {}
         };
-        this.encodingList = ['utf-8', 'iso-8859-1', 'iso-8859-15'];
+        this.encodingList = ['utf-8', 'iso-8859-1', 'iso-8859-15', 'windows-1252'];
         this.selectableFields = {
             codeInsee: { label: 'Adresse : code INSEE' },
             codePostal: { label: 'Adresse : code postal' },
