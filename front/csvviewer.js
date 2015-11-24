@@ -58,8 +58,8 @@ class EncodingSelector extends React.Component {
                     <span>Un problème avec l'affichage des caractères ? Essayez de lire le fichier avec un autre encodage :&nbsp;</span>
                     <select className="form-control form-inline" onChange={e => this.onChange(e)} value={this.props.encoding}>
                         <option value="utf-8">UTF-8</option>
-                        <option value="iso-8859-1">Latin-1</option>
-                        <option value="windows-1252">Windows</option>
+                        <option value="iso-8859-1">ISO 8859-1 (Latin-1)</option>
+                        <option value="iso-8859-15">ISO 8859-15 (Latin-9)</option>
                     </select>
                 </div>
         );
