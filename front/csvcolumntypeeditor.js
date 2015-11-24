@@ -7,9 +7,27 @@ class ColumnWrapper extends React.Component {
         this.props.onTypeChange(event.target.value);
     }
 
+    renderValidation() {
+        if (! this.props.type) return '';
+        const errorCount = this.props.columnErrors ? this.props.columnErrors.length : 0;
+        return <span>{errorCount} erreur(s)</span>;
+    }
+
+    hasType() {
+        return !!this.props.type;
+    }
+
+    errorCount() {
+        return (this.hasType() && this.props.columnErrors && this.props.columnErrors.length) || 0;
+    }
+
+    validationState() {
+        return this.hasType() && (this.errorCount() > 0 ? 'warning' : 'success');
+    }
+
     render() {
         return (
-            <tr>
+            <tr className={this.validationState()}>
                 <td>{this.props.column}</td>
                 <td>
                     <select onChange={e => this.onTypeChange(e)} className="form-control" value={this.props.type || 'nonDefini'}>
@@ -18,6 +36,7 @@ class ColumnWrapper extends React.Component {
                     </select>
                 </td>
                 <td></td>
+                <td>{ this.renderValidation() }</td>
             </tr>
         );
     }
@@ -40,10 +59,11 @@ export default class CSVColumnTypeEditor extends React.Component {
                             <th>Nom de la colonne</th>
                             <th>Champ associé</th>
                             <th>Paramètres additionnels</th>
+                            <th>Validation</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.columns.map((column, i) => <ColumnWrapper type={this.props.selectedTypes[column]} onTypeChange={newType => this.onTypeChange(column, newType)} selectableFields={this.props.selectableFields} column={column} key={i} />)}
+                        {this.props.columns.map((column, i) => <ColumnWrapper type={this.props.selectedTypes[column]} onTypeChange={newType => this.onTypeChange(column, newType)} selectableFields={this.props.selectableFields} column={column} columnErrors={this.props.columnErrors[column]} key={i} />)}
                     </tbody>
                 </table>
             </div>
